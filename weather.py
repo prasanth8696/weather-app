@@ -2,8 +2,11 @@ import requests #pip install requests
 from colorama import Fore,init
 import os
 import time
+from config import *
+#clear the terminal
 #windows => 'cls' ,Linux and mac => 'clear'
-clear = lambda : os.system('clear')
+clear_var = 'cls' if os.name=='nt' else 'clear'
+clear = lambda : os.system(clear_var)
 clear()
 init(autoreset=True)
 green = Fore.LIGHTGREEN_EX
@@ -87,16 +90,17 @@ if choice == 1 :
     if city == '0' :
      clear()
      break
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid=7716c5e05f8561c1893c02ae19c63e24&units=metric'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apikey}&units=metric'
     weather_check(url)
   
 elif choice == 2 :
     while(True) :
      lon,lat = map(float,(input('enter your longitude and lattitude ').strip().split()))
-     url = 'http://api.openweathermap.org/data/2.5/weather?lon={0}&lat={1}&appid=7716c5e05f8561c1893c02ae19c63e24&units=metric'.format(lon,lat)
+     url = f'http://api.openweathermap.org/data/2.5/weather?lon={lon}&lat={lat}&appid={apikey}&units=metric'
      weather_check(url)
 else :
     raise KeyError('Invalid Input.....')
 
 
 print('This is Developed by'+ red + bold + ' SHAN.......')
+print()
